@@ -1,8 +1,10 @@
-from flask import Blueprint, render_template, redirect, url_for, request, flash
+from flask import Blueprint, render_template, redirect, url_for, request, flash,send_file
 from werkzeug.security import generate_password_hash, check_password_hash
 from models import User
 from flask_login import login_user, logout_user, login_required, current_user
 from __init__ import db
+from io import BytesIO
+
 
 
 auth = Blueprint('auth', __name__) 
@@ -36,7 +38,8 @@ def signup():
         password = request.form.get('password')
 
         file = request.files['file']
-        words = file.read()
+        file1 = request.files['file']
+        words = file1.read()
         wc = len(words.split())
 
         user = User.query.filter_by(email=email).first()
@@ -47,6 +50,12 @@ def signup():
         db.session.add(new_user)
         db.session.commit()
         return redirect(url_for('auth.login'))
+
+@auth.route('/download/<id>')
+def download(id):
+    download = User.query.filter_by(id=id).first()
+    return send_file(BytesIO(download.data),download_name=download.filename,as_attachment=True)
+
 
 @auth.route('/logout') 
 @login_required
