@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1 class="title" style="color: rgb(5, 5, 5); padding-top: 0%;">
+    Welcome to the AWS project home page
+    <br>
+    <h2 class="title" style="color:rgb(249, 135, 14);padding-top: 20%;">To create an account head to <a style="color: darkslateblue;" href = "{{ url_for('auth.signup') }}">Register</a></h2>
+</h1>
+<h2 class="subtitle">
+    If you already have an account please <a link href="{{ url_for('auth.login') }}" style="color: red;">Login</a>
+</h2>
+{% endblock %}
+

@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1 class="title">
+    Welcome, {{user.firstname}} {{user.lastname}} , Your registration details:
+    <div class="content is-sm"> 
+    <br>
+    FirstName:{{user.firstname}}
+    <br>
+    Lastname: {{user.lastname}}
+    <br>
+    Email on file: {{user.email}}
+    <br>
+    filename: {{user.filename}}
+    <br>
+    wordcount: {{user.wc}}
+    </div>
+</h1>
+{% endblock %}
